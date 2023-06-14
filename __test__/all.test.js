@@ -69,3 +69,46 @@ test("Check For Property Age Is 19", () => {
   };
   expect(myString).toHaveProperty("age", 19);
 });
+
+expect.extend({
+  toBeLargerThan(received, target) {
+    const pass = received > target;
+    if (pass) {
+      return {
+        message: () => `Expected ${received} To Be Larger Than ${target}`,
+        pass: true,
+      };
+    } else {
+      return {
+        message: () =>
+          `Error: Expected ${received} To Be Larger Than ${target}`,
+        pass: false,
+      };
+    }
+  },
+});
+
+test("Check If Number Is Larger Than Other Number", () => {
+  expect(10).toBeLargerThan(9);
+});
+
+expect.extend({
+  toBeBetween(received, start, end) {
+    const pass = received > start && received < end;
+    if (pass) {
+      return {
+        message: () => `Expected ${received} To Be Between ${start} and ${end}`,
+        pass: true,
+      };
+    } else {
+      return {
+        message: () => `Expected ${received} To Be Between ${start} and ${end}`,
+        pass: false,
+      };
+    }
+  },
+});
+
+test("Check If Year Is Between Years Range", () => {
+  expect(1982).toBeBetween(1980, 2020);
+});
